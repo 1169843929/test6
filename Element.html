@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <el-row>
+            <el-col :span="12" offset="6">
+                <a href="https://github.com/ElemeFE/element/blob/master/components.json" target="_blank"><el-button type="primary" plain round style="width: 100%;">点击查询Element完整组件列表</el-button></a>
+            </el-col>
+        </el-row>
+        <pre>
+        完整引入 Element :
+        1.npm i element-ui -S
+        2.import ElementUI from 'element-ui'
+        按需引入 Element :
+        1.安装 babel-plugin-component：
+        npm install babel-plugin-component -D
+        2.然后，将 .babelrc 修改为：
+        {
+            "presets": [["es2015", { "modules": false }]],
+            "plugins": [
+            [
+                "component",
+                {
+                "libraryName": "element-ui",
+                "styleLibraryName": "theme-chalk"
+                }
+            ]
+            ]
+        }
+        3.接下来，如果你只希望引入部分组件，比如 Button 和 Select，那么需要在 main.js 中写入以下内容：
+        import { Button, Select } from 'element-ui';
+        Vue.use(Button)
+        Vue.use(Select)
+
+        /* 或写为
+        * Vue.component(Button.name, Button);
+        * Vue.component(Select.name, Select);
+        */
+
+        全局配置
+        在引入 Element 时，可以传入一个全局配置对象。该对象目前支持 size 与 zIndex 字段。size 用于改变组件的默认尺寸，zIndex 设置弹框的初始 z-index（默认值：2000）。按照引入 Element 的方式，具体操作如下：
+        完整引入 Element：
+
+        import Vue from 'vue';
+        import Element from 'element-ui';
+        Vue.use(Element, { size: 'small', zIndex: 3000 });
+
+        
+        基于断点的隐藏类
+        Element 额外提供了一系列类名，用于在某些条件下隐藏元素。这些类名可以添加在任何 DOM 元素或自定义组件上。如果需要，请自行引入以下文件：
+
+        import 'element-ui/lib/theme-chalk/display.css';
+        包含的类名及其含义为：
+
+        hidden-xs-only - 当视口在 xs 尺寸时隐藏
+        hidden-sm-only - 当视口在 sm 尺寸时隐藏
+        hidden-sm-and-down - 当视口在 sm 及以下尺寸时隐藏
+        hidden-sm-and-up - 当视口在 sm 及以上尺寸时隐藏
+        hidden-md-only - 当视口在 md 尺寸时隐藏
+        hidden-md-and-down - 当视口在 md 及以下尺寸时隐藏
+        hidden-md-and-up - 当视口在 md 及以上尺寸时隐藏
+        hidden-lg-only - 当视口在 lg 尺寸时隐藏
+        hidden-lg-and-down - 当视口在 lg 及以下尺寸时隐藏
+        hidden-lg-and-up - 当视口在 lg 及以上尺寸时隐藏
+        hidden-xl-only - 当视口在 xl 尺寸时隐藏
+
+        Row 属性介绍
+        参数	说明	
+        gutter	栅格间隔
+        type	布局模式，可选 flex，现代浏览器下有效	
+        justify	flex 布局下的水平排列方式	start/end/center/space-around/space-between	默认start
+        align	flex 布局下的垂直排列方式	top/middle/bottom	默认top 
+        tag	自定义元素标签	string	*	div
+
+        
+        Col 属性介绍
+        参数	说明
+        span	栅格占据的列数                  	
+        offset	栅格左侧的间隔格数
+        push	栅格向右移动格数                
+        pull	栅格向左移动格数                
+        xs	    <768px 响应式栅格数或者栅格属性对象	
+        sm	    ≥768px 响应式栅格数或者栅格属性对象	
+        md	    ≥992px 响应式栅格数或者栅格属性对象	
+        lg	    ≥1200px 响应式栅格数或者栅格属性对象	
+        xl	    ≥1920px 响应式栅格数或者栅格属性对象	
+        tag	    自定义元素标签	
+
+        Container Attributes
+        参数	说明	
+        direction	子元素的排列方向  horizontal / vertical	子元素中有 el-header 或 el-footer 时为 vertical，否则为 
+        
+        Header Attributes
+        参数	说明	
+        height	顶栏高度	60px
+
+        Aside Attributes
+        参数	说明	
+        width	侧边栏宽度	300px
+
+        Footer Attributes
+        参数	说明	
+        height	底栏高度	60px
+        </pre>
+        <el-row>
+            <el-col :span="24" align="center" class="grid-content bg-purple-dark">Element把一行分成24个单元</el-col>
+            <el-col :span="24">
+                <div class="space">按钮样式</div>
+                <el-button plain type="success" round :span="4">button</el-button>
+                <el-button plain type="primary" round :span="4">button</el-button>
+                <el-button type="primary" round :span="4">button</el-button>
+                <el-button type="primary" circle :span="4">button</el-button>
+                <el-button type="primary" disabled>被禁用的按钮</el-button>
+            </el-col>
+            <el-col :span="24">
+                <div align="center" class="space">文字按钮</div>
+                <el-button type="text">文字按钮</el-button>
+                <el-button type="text" disabled>文字按钮</el-button>
+            </el-col>
+            <el-col :span="24">
+                <div align="center" class="space">图标按钮</div>
+                <el-button type="primary" icon="el-icon-edit"></el-button>
+                <el-button type="primary" icon="el-icon-search">搜索</el-button>
+                <el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+            </el-col>
+            <el-col class="space"></el-col>
+            <el-col>
+                <el-button>默认按钮</el-button>
+                <el-button size="medium">中等按钮</el-button>
+                <el-button size="small">小型按钮</el-button>
+                <el-button size="mini">超小按钮</el-button>
+            </el-col>
+            <el-col class="space">按钮组</el-col>
+            <el-col :span="24">
+                <el-button-group>
+                    <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
+                    <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+                </el-button-group>
+                <div class="space"></div>
+                <el-button-group>
+                    <el-button type="primary" icon="el-icon-edit"></el-button>
+                    <el-button type="primary" icon="el-icon-share"></el-button>
+                    <el-button type="primary" icon="el-icon-delete"></el-button>
+                </el-button-group>
+                <div>
+                    <div class="space">加载中按钮</div>
+                    <el-button type="primary" :loading="true">加载中</el-button>
+                </div>
+            </el-col>
+            <el-col class="space">选项组</el-col>
+            <el-col>
+                <el-radio-group v-model="radio1">
+                    <el-radio :label="1">选项1</el-radio>
+                    <el-radio :label="2">选项2</el-radio>
+                    <el-radio :label="3">选项3</el-radio>
+                </el-radio-group>
+            </el-col>
+            <el-col class="space">按钮选项组</el-col>
+            <el-col>
+                <el-radio-group v-model="radio2">
+                    <el-radio-button :label="1">选项1</el-radio-button>
+                    <el-radio-button :label="2">选项2</el-radio-button>
+                    <el-radio-button :label="3">选项3</el-radio-button>
+                </el-radio-group>
+            </el-col>
+            <el-col class="space">带有边框的选项组</el-col>
+            <el-col>
+                <el-radio-group v-model="place" >
+                    <el-radio border :label="1">北京</el-radio>
+                    <el-radio border :label="2">上海</el-radio>
+                    <el-radio border :label="3">广州</el-radio>
+                </el-radio-group>
+            </el-col>
+            <el-col class="space">多选框组(多选框的v-model要用数组的形式来表示)</el-col>
+            <el-col>
+                <!-- min和max用来限制选项个数的最小值和最大值 -->
+                <el-checkbox-group v-model="place2" :min="1" :max="2">
+                    <!-- 若要把选项样式设置为按钮样式,则写成 <el-checkbox-button></el-checkbox-button> -->
+                    <!-- 若要把选项样式设置为带边框样式,则在 el-checkbox 里面加一个border即可 -->
+                    <el-checkbox :label="1">北京</el-checkbox>
+                    <el-checkbox :label="2">上海</el-checkbox>
+                    <el-checkbox :label="3">广州</el-checkbox>
+                </el-checkbox-group>
+            </el-col>
+            <el-col class="space">全选绑定</el-col>
+            <el-col>
+                <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+                <div style="margin: 15px 0;"></div>
+                <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+                    <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+                </el-checkbox-group>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="6"><div class="grid-content bg-purple-dark">惊<i class="el-icon-plus"></i></div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple-dark">鸿<i class="el-icon-service"></i></div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple-dark">御<i class="el-icon-location"></i></div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple-dark">风<i class="el-icon-setting"></i></div></el-col>
+        </el-row>
+    </div>
+</body>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .grid-content{
+        border: 1px solid azure;
+        border-radius: 4px;
+    }
+    .bg-purple-dark{
+        background: bisque;
+    }
+    .el-col{
+        text-align: center;
+    }
+    .space{
+        padding: 10px 0;
+    }
+</style>
+
+<script>
+    const CityOption = ['上海', '北京', '广州', '深圳'];
+    new Vue({
+      el: '#app',
+      data: function() {
+        return {
+            radio1:1,
+            radio2:1,
+            place:1,
+            place2:[1,2],
+            checkAll: false,
+            cities:CityOption,
+            checkedCities: ['上海', '北京'],
+            isIndeterminate: true,
+         }
+      },
+      methods:{
+        handleCheckAllChange(flag) {
+            this.checkedCities = flag ? CityOption : [];
+            this.isIndeterminate = false; //就是把选项上的那个横线给消掉
+        },
+        handleCheckedCitiesChange(data) {
+        let checkedCount = data.length;
+        this.checkAll = checkedCount === this.cities.length;
+        //当选中的选项超过0个,小于4个时,isIndeterminate为真,全选按钮里面打横线,当没有按钮被选中,或者全部被选中, 全选按钮空白或者打钩
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length
+        //checkedCount > 0 && checkedCount < this.cities.length 的值为boolean
+        }
+      }
+    })
+</script>
+</html>
+
